@@ -23,7 +23,7 @@
 * Personal page shows all the item the person uploaded `in progress`
 * wishinglist shows all the items the customers liked `in progress`
 * Related items
-* Categories
+* Categories `in progress`
 * .......
 
 ###How to test the html template
