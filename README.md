@@ -31,9 +31,9 @@
 *
 * type the code and replace parameter accordingly:
 *
-* @app.route("/name_of_the_page")
-*   def name_of_the_page():
-*        return render_template("name_of_the_page.html")
+ @app.route("/name_of_the_page")
+   def name_of_the_page():
+       return render_template("name_of_the_page.html")
 *
 * save and type in the browser "http://http://127.0.0.1:5000/name_of_the_page" 
 
