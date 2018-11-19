@@ -21,7 +21,7 @@
 * Image upload `in progress`
 * Single item page `in progress`
 * Personal page shows all the item the person uploaded `in progress`
-* wishinglist shows all the items the customers liked
+* wishinglist shows all the items the customers liked `in progress`
 * Related items
 * Categories
 * .......
