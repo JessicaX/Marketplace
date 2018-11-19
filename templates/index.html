@@ -1,0 +1,133 @@
+{% extends "layout.html" %}
+{% block title %}Index{% endblock %}
+
+{% block content %}
+<div class="row mt-3">
+    {% for item in items %}
+        <div class="col-md-3 col-md-3 px-1 my-1">
+            <div class="card">
+                <img class="card-img-top" style="height:300px;width:100%;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f94aaedd%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f94aaedd%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2299.125%22%20y%3D%2296.3%22%3EImage%20cap%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap">
+                <div class="card-body">
+                    <div class="card-text font-weight-bold" style="font-size: 110%;">{{item.Name}}</div>
+                    <div class="card-text">{{"${:,}".format(item.Price)}}</div>
+                    <div class="card-text text-truncate"><small>{{item.Description}}</small></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+<div class="modal fade" id="register-model" tabindex="-1" role="dialog" aria-labelledby="Register" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Register</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form class="form" method="POST" action="/register">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="username"><b>Username</b></label>
+                        <input type="text" class="form-control" id="username" name="username" placeholder="Letters and digits only within 20 characters" onkeypress="return validateUsername(event, this)" required/>
+                        <div id="username-feedback" style="display:none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><b>Password</b></label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password" required/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cpassword"><b>Confirm Password</b></label>
+                        <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password" required/>
+                    </div>
+                    <div id="password-feedback" style="display:none;">
+                        
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="login-model" tabindex="-1" role="dialog" aria-labelledby="Login" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+            <form class="form" method="POST" action="/login">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="username-login"><b>Username</b></label>
+                        <input type="text" class="form-control" id="username-login" name="username" placeholder="Username" onkeypress="return validateUsername(event, this)" required/>
+                        <div id="username-feedback" style="display:none;"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password-login"><b>Password</b></label>
+                        <input type="password" class="form-control" id="password-login" name="password" placeholder="Password" required/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    function validateUsername(event, element){
+        console.log(event)
+        if(event.charCode >= 48 && event.charCode <= 57 || (event.charCode >= 65 && event.charCode <=90) || (event.charCode >=97 && event.charCode <=122)){
+            return true;
+        }
+        if($(element).val().length === 20){
+            return false;
+        }
+    }
+    $("#username").on("change", function(){
+        $.get("/checkusername/" + $("#username").val(), function(x){
+                if(!x.status){
+                    $("#username").removeClass("is-valid").addClass("is-invalid");
+                    $("#username-feedback").html("Username is not available").removeClass("valid-feedback").addClass("invalid-feedback").show();
+                }else{
+                    $("#username").removeClass("is-invalid")//.addClass("is-valid");
+                    $("#username-feedback").hide();
+                    //$("#username-feedback").html("Username is available").removeClass("invalid-feedback").addClass("valid-feedback").show();
+                }
+            })
+    });
+
+    $("#cpassword").on("change", function(event){
+        let pwd = $("#password").val();
+        let cpwd = $(this).val();
+        if(pwd !== cpwd){
+            $("#cpassword").addClass("is-invalid");
+            $("#password-feedback").removeClass("valid-feedback").addClass("invalid-feedback").html("Passwords are not same").show();
+        }
+        if(pwd === cpwd){
+            $("#cpassword").removeClass("is-invalid").addClass("is-valid");
+            $("#password-feedback").removeClass("invalid-feedback").addClass("valid-feedback").html("Good to go").show();
+        }
+    })
+    $('form').submit(function() {
+        let pwd = $("#password").val();
+        let cpwd = $("#cpassword").val();
+        if(pwd !== cpwd){
+            $("#cpassword").addClass("is-invalid");
+            $("#password-feedback").removeClass("valid-feedback").addClass("invalid-feedback").html("Passwords are not same").show();
+            return false;
+        }
+        return true;
+    });
+</script>
+{% endblock %}
