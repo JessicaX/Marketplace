@@ -1,0 +1,76 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="row mt-3">
+    <ul class="list-inline">
+        <li class="list-inline-item"><a href="#">Lorem ipsum</a></li>
+        <li class="list-inline-item"><a href="#">Phasellus iaculis</a></li>
+        <li class="list-inline-item">Current location</li>
+    </ul>
+</div>
+<div class="row mt-3">
+        <div class="col-4">
+            <div class="list-group">
+                <li class="nav-header disabled"><a>Sort</a></li>
+                <a href="#" class="list-group-item list-group-item-action btn btn-primary">
+                    Recent
+                </a>
+                <a href="#" class="list-group-item list-group-item-action btn btn-primary">Price - High to low</a>
+                <a href="#" class="list-group-item list-group-item-action btn btn-primary">Price - Low to high</a>
+            </div>
+            </br>
+            <div class="list-group">
+                <li class="nav-header disabled"><a>Item Conditions</a></li>
+                <a href="#" class="list-group-item list-group-item-action btn btn-primary">New</a>
+                <a href="#" class="list-group-item list-group-item-action btn btn-primary">Old</a>
+            </div>
+            </br>
+            <div class="list-group">
+                    <li class="nav-header disabled"><a>Price</a></li>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">Min Price</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    </div>
+                    <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text" id="inputGroup-sizing-default">Max Price</span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default">
+                    </div>
+            </div>
+        </div> 
+        <div class="col-8">
+            <div class = "row">
+            {% for item in items %}
+                <div class="col-4 px-1 my-1">
+                    <div class="card">
+                        <a href="/singlepage/{{item.Id}}">
+                            {% if item.imageurl %}
+                                <img class="card-img-top" style="height:300px;width:100%;" src="{{item.imageurl}}" alt="Card image cap">
+                            {% else %}
+                                <img class="card-img-top" style="height:300px;width:100%;" src="https://www.runawavesport.com/content/images/thumbs/default-image_600.png" alt="Card image cap">
+                            {% endif%}
+                        </a>
+                        <div class="card-body border-top">
+                            <div class="card-text font-weight-bold" style="font-size: 110%;">{{item.Name}}</div>
+                            <div class="card-text">{{"${:,}".format(item.Price)}}</div>
+                            <div class="card-text text-truncate"><small>{{item.Description}}</small></div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+            </div>
+        </div>
+</div>  
+
+{% endblock%}
+{% block script %}
+<script>
+    function  switchCarouselImage(index){
+        $(".carousel").carousel(index);
+    }
+</script>
+
+{% endblock %}

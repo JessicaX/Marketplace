@@ -1,0 +1,21 @@
+{% extends "layout.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+<div class="row mt-3">
+    <div class="col-3">
+        {% include 'sidebar.html' %}
+    </div>
+    <div class="col">
+        <form action="/updateprofile" method="POST">
+            <div class="form-group">
+                <label for="Name"><b>Name: </b></label>
+                <span>{{session["user"]["Name"]}}</span>
+            </div>
+            <div class="form-group">
+                <label for="JoinDate"><b>Join TIme: </b></label>
+                <span>{{session["user"]["JoinTime"]}}</span>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

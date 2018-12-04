@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% if "user" not in session %}
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>User Profile</h2></div>
+        <div class="panel-body">
+            <p>
+                There is no one login yet. 
+            </p>
+        </div>
+    </div>
+</div>
+{% else %}
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading"><h2>Hello, {{session["user"]["Name"]}}</h2></div>
+        <div class="panel-body">
+            <p>
+                haha {{session["user"]["Name"]}} This is your wishing list:
+            </p>
+        </div>
+    </div>
+</div>
+{% endif %}
+<div class="row mt-3">
+    {% for item in items %}
+        <div class="col-md-3 col-md-3 px-1 my-1">
+            <div class="card">
+                <img class="card-img-top" style="height:300px;width:100%;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_166f94aaedd%20text%20%7B%20fill%3Argba(255%2C255%2C255%2C.75)%3Bfont-weight%3Anormal%3Bfont-family%3AHelvetica%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_166f94aaedd%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23777%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2299.125%22%20y%3D%2296.3%22%3EImage%20cap%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" alt="Card image cap">
+                <div class="card-body">
+                    <div class="card-text font-weight-bold" style="font-size: 110%;">{{item.Name}}</div>
+                    <div class="card-text">{{"${:,}".format(item.Price)}}</div>
+                    <div class="card-text text-truncate"><small>{{item.Description}}</small></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+{% endblock%}
+
+{% block script %}
+
+{% endblock %}

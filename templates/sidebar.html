@@ -1,0 +1,41 @@
+<link rel=stylesheet type=text/css href="{{ url_for('static', filename='sidebar.css') }}">
+<div class="wrapper">
+        <!-- Sidebar -->
+    <nav id="sidebar">
+        <div class="sidebar-header text-center">
+            <img src="{{'https://res.cloudinary.com/yybird/image/upload/v1543422351/avatar-default-thumb_qigigq.jpg'|resize('w_50,h_50,c_scale')}}" width=""/>
+        </div>
+        <ul class="list-unstyled components text-center">
+            <!-- <p>Dummy Heading</p> -->
+            <li {% if request.path == '/profile' %}class="active"{% endif %}>
+                <a href="/profile">Profile</a>
+            </li>
+            <li {% if request.path == '/sell' %}class="active"{% endif %}>
+                <a href="/sell">Sell</a>
+            </li>
+            <li {% if request.path == '/myitems' %}class="active"{% endif %}>
+                <a href="/myitems">My Items</a>
+            </li>
+            <li {% if request.path == '/myfavourites' %}class="active"{% endif %}>
+                <a href="/myfavourites">Favourites</a>
+            </li>
+            <!-- <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li> -->
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+    </nav>
+</div>
