@@ -21,9 +21,9 @@
 * Image upload `in progress`
 * Single item page `in progress`
 * Personal page shows all the item the person uploaded `in progress`
-* wishinglist shows all the items the customers liked
+* wishinglist shows all the items the customers liked `in progress`
 * Related items
-* Categories
+* Categories `in progress`
 * .......
 
 ###How to test the html template
@@ -31,9 +31,9 @@
 *
 * type the code and replace parameter accordingly:
 *
-* @app.route("/name_of_the_page")
-*   def name_of_the_page():
-*        return render_template("name_of_the_page.html")
+* `@app.route("/name_of_the_page")`
+*   `def name_of_the_page():`
+*       `return render_template("name_of_the_page.html")`
 *
 * save and type in the browser "http://http://127.0.0.1:5000/name_of_the_page" 
 
