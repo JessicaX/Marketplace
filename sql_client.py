@@ -210,3 +210,8 @@ class MySqlClient():
         return self._parse_result(mycursor)
 
     def _parse_result(self, mycursor):
+        result = []
+        columns = tuple( [d[0] for d in mycursor.description] )
+        for row in mycursor:
+            result.append(dict(zip(columns, row)))
+        return result
